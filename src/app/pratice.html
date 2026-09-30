@@ -1,0 +1,20 @@
+<!-- Interpolation: show the title value. -->
+<h2>{{ title }}</h2>
+
+<!-- Property binding: disable the button when needed. -->
+<button [disabled]="isDisabled">Submit</button>
+
+<!-- Event binding. -->
+<button (click)="onClick()">Click Me</button>
+
+<!-- Conditional rendering. -->
+@if (loading) {
+  <p>Loading...</p>
+} @else {
+  <p>Data Loaded</p>
+}
+
+<!-- Loop through the tasks array. -->
+@for (task of tasks; track task.id) {
+  <p>{{ task.title }}</p>
+}
