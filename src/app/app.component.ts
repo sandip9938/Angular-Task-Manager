@@ -2,7 +2,7 @@
 import { Component, signal } from '@angular/core';
 
 // Import the RouterOutlet directive from the Angular router package
-import { RouterOutlet } from '@angular/router';
+import { Dashboard } from './features/dashboard/pages/dashboard/dashboard.component';
 
 
 // The App component is decorated with the @Component decorator, which specifies the component's metadata.
@@ -10,7 +10,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   styleUrl: './app.component.scss',
   templateUrl: './app.component.html',
-  imports: [RouterOutlet]
+  imports: [Dashboard]
 })
 
 
