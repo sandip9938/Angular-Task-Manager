@@ -1,0 +1,144 @@
+:host {
+	display: block;
+}
+
+.task-page {
+	min-height: 100vh;
+	padding: 64px 24px 80px;
+	background: linear-gradient(145deg, #f7f9f6 0%, #eef3ee 100%);
+}
+
+.task-page__content {
+	width: min(100%, 820px);
+	margin: 0 auto;
+}
+
+.page-header {
+	margin-bottom: 34px;
+}
+
+.page-header__eyebrow,
+.tasks-section__eyebrow {
+	margin: 0 0 10px;
+	color: var(--color-green);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1.4px;
+}
+
+.page-header h1 {
+	margin: 0;
+	color: var(--color-ink);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 42px;
+	font-weight: 500;
+}
+
+.task-summary {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin-bottom: 48px;
+	padding: 20px 0;
+	border-top: 1px solid var(--color-line);
+	border-bottom: 1px solid var(--color-line);
+}
+
+.task-summary__item {
+	display: flex;
+	min-height: 58px;
+	flex-direction: column;
+	justify-content: center;
+	gap: 5px;
+	padding: 0 24px;
+	border-right: 1px solid var(--color-line);
+}
+
+.task-summary__item:first-child {
+	padding-left: 0;
+}
+
+.task-summary__item:last-child {
+	border-right: 0;
+}
+
+.task-summary__label {
+	color: var(--color-muted);
+	font-size: 13px;
+}
+
+.task-summary__value {
+	color: var(--color-ink);
+	font-size: 25px;
+	line-height: 1;
+}
+
+.task-summary__item--completed .task-summary__value {
+	color: var(--color-green);
+}
+
+.task-summary__item--pending .task-summary__value {
+	color: var(--color-amber);
+}
+
+.tasks-section__heading {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.tasks-section__eyebrow {
+	margin-bottom: 6px;
+}
+
+.tasks-section__heading h2 {
+	margin: 0;
+	font-size: 21px;
+	font-weight: 650;
+}
+
+.tasks-section__count {
+	padding-bottom: 3px;
+	color: var(--color-muted);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+.task-list {
+	display: grid;
+	gap: 10px;
+}
+
+.task-list__empty {
+	margin: 0;
+	padding: 32px 20px;
+	border: 1px dashed #cbd7ce;
+	border-radius: 8px;
+	color: var(--color-muted);
+	text-align: center;
+}
+
+@media (max-width: 560px) {
+	.task-page {
+		padding: 40px 18px 56px;
+	}
+
+	.page-header h1 {
+		font-size: 35px;
+	}
+
+	.task-summary {
+		margin-bottom: 36px;
+		padding: 16px 0;
+	}
+
+	.task-summary__item {
+		padding: 0 12px;
+	}
+
+	.task-summary__value {
+		font-size: 23px;
+	}
+}

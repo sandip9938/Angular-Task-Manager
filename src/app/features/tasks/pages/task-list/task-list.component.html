@@ -1,0 +1,42 @@
+
+<main class="task-page">
+  <div class="task-page__content">
+    <header class="page-header">
+      <p class="page-header__eyebrow">PERSONAL ORGANIZER</p>
+      <h1>Task Manager</h1>
+    </header>
+
+    <section class="task-summary" aria-label="Task summary">
+      <div class="task-summary__item">
+        <span class="task-summary__label">Total tasks</span>
+        <strong class="task-summary__value">{{ tottaltasks() }}</strong>
+      </div>
+      <div class="task-summary__item task-summary__item--completed">
+        <span class="task-summary__label">Completed</span>
+        <strong class="task-summary__value">{{ completedtasks() }}</strong>
+      </div>
+      <div class="task-summary__item task-summary__item--pending">
+        <span class="task-summary__label">Pending</span>
+        <strong class="task-summary__value">{{ pendingtasks() }}</strong>
+      </div>
+    </section>
+
+    <section class="tasks-section" aria-labelledby="tasks-heading">
+      <div class="tasks-section__heading">
+        <div>
+          <p class="tasks-section__eyebrow">YOUR WORKSPACE</p>
+          <h2 id="tasks-heading">All tasks</h2>
+        </div>
+        <span class="tasks-section__count">{{ tottaltasks() }} ITEMS</span>
+      </div>
+
+      <div class="task-list">
+        @for (task of tasks(); track task.id) {
+          <app-task-card [task]="task" (deleteTask)="removeTask($event)" />
+        } @empty {
+          <p class="task-list__empty">All clear. No tasks left.</p>
+        }
+      </div>
+    </section>
+  </div>
+</main>

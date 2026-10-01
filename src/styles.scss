@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	color-scheme: light;
+	font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	--color-canvas: #f3f6f2;
+	--color-surface: #ffffff;
+	--color-ink: #20352c;
+	--color-muted: #748078;
+	--color-line: #e0e7e1;
+	--color-green: #26725a;
+	--color-green-soft: #e6f2eb;
+	--color-amber: #a55f1d;
+	--color-amber-soft: #fff1dc;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
+	background: var(--color-canvas);
+	color: var(--color-ink);
+}
+
+button {
+	font: inherit;
+}
+
+button:focus-visible {
+	outline: 3px solid #79a994;
+	outline-offset: 3px;
+}

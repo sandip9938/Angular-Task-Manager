@@ -53,20 +53,3 @@ function findTaskById(id: number): User1 | undefined {
   // Implementation for finding task by ID
   return userList.find((user) => user.Id === id);
 }
-
-
-
-// Component Anatomy
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root', // Selector is used to identify the component in HTML
-  templateUrl: './app.component.html', // Template URL points to the HTML file for the component
-  styleUrls: ['./app.component.css'], // Style URLs point to the CSS files for the component
-  standalone: true // Standalone components are self-contained and do not require a module to be declared in
-})
-
-// Class Definition
-export class AppComponent {
-  title = 'angular-task-manager'; // Title property for the component
-}

@@ -1,0 +1,22 @@
+
+<article class="task-card" [class.task-card--completed]="task().status === 'completed'">
+  <span class="task-card__marker" aria-hidden="true"></span>
+
+  <div class="task-card__details">
+    <h3>{{ task().title }}</h3>
+    @if (task().status === 'completed') {
+      <span class="task-status task-status--completed">Completed</span>
+    } @else {
+      <span class="task-status task-status--pending">Pending</span>
+    }
+  </div>
+
+  <button
+    class="task-card__delete"
+    type="button"
+    [attr.aria-label]="'Delete task: ' + task().title"
+    (click)="deleteTask.emit(task().id)"
+  >
+    Delete
+  </button>
+</article>
