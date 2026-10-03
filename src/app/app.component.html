@@ -1,1 +1,10 @@
-<app-dashboard />
+<header class="app-shell__header">
+  <nav class="app-shell__nav" aria-label="Main navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/users" routerLinkActive="active">Users</a>
+  </nav>
+</header>
+
+<main class="app-shell__content">
+  <router-outlet />
+</main>

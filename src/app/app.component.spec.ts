@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+
 import { App } from './app.component';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   it('should create the app', () => {
@@ -15,10 +15,13 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render navigation links', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-task-manager');
+    const links = Array.from(compiled.querySelectorAll('a')).map((link) => link.textContent?.trim());
+
+    expect(links).toContain('Dashboard');
+    expect(links).toContain('Users');
   });
 });

@@ -1,0 +1,37 @@
+<section class="user-list-page" aria-labelledby="users-heading">
+  <header class="user-list-page__header">
+    <div>
+      <p class="user-list-page__eyebrow">PEOPLE</p>
+      <h1 id="users-heading">Users</h1>
+    </div>
+
+    <button type="button" class="user-list-page__button" (click)="refreshUsers()">
+      Refresh
+    </button>
+  </header>
+
+  <label class="user-list-page__search" for="user-search">
+    <span>Search by name</span>
+    <input
+      id="user-search"
+      type="search"
+      placeholder="Search by name"
+      [value]="query()"
+      (input)="onSearch($event)"
+    />
+  </label>
+
+  @if (isLoading()) {
+    <div class="state state--loading" aria-live="polite">Loading users...</div>
+  } @else if (errorMessage()) {
+    <div class="state state--error" role="alert">{{ errorMessage() }}</div>
+  } @else if (filteredUsers().length) {
+    <div class="user-list-page__grid">
+      @for (user of filteredUsers(); track user.id) {
+        <app-user-card [user]="user" />
+      }
+    </div>
+  } @else {
+    <div class="state state--empty" aria-live="polite">No users match your search.</div>
+  }
+</section>

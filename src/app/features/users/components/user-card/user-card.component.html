@@ -1,0 +1,11 @@
+<article class="user-card" [attr.aria-label]="'User card for ' + user().name">
+  <div class="user-card__avatar" aria-hidden="true">{{ getInitials() }}</div>
+
+  <div class="user-card__content">
+    <h3>{{ user().name }}</h3>
+    <p>{{ user().email }}</p>
+    <p>{{ user().phone }}</p>
+  </div>
+
+  <a class="user-card__link" [routerLink]="['/users', user().id]">View details</a>
+</article>

@@ -1,0 +1,39 @@
+@if (isLoading()) {
+  <div class="state state--loading" aria-live="polite">Loading user details...</div>
+} @else if (errorMessage()) {
+  <div class="state state--error" role="alert">{{ errorMessage() }}</div>
+} @else if (user(); as selectedUser) {
+  <article class="user-detail" aria-labelledby="user-detail-title">
+    <a class="user-detail__back" routerLink="/users">← Back to users</a>
+
+    <div class="user-detail__header">
+      <div class="user-detail__avatar" aria-hidden="true">{{ getInitials(selectedUser.name) }}</div>
+
+      <div>
+        <p class="user-detail__eyebrow">PROFILE</p>
+        <h1 id="user-detail-title">{{ selectedUser.name }}</h1>
+      </div>
+    </div>
+
+    <dl class="user-detail__meta">
+      <div>
+        <dt>Username</dt>
+        <dd>{{ selectedUser.username ?? 'N/A' }}</dd>
+      </div>
+      <div>
+        <dt>Email</dt>
+        <dd>{{ selectedUser.email }}</dd>
+      </div>
+      <div>
+        <dt>Phone</dt>
+        <dd>{{ selectedUser.phone }}</dd>
+      </div>
+      <div>
+        <dt>Website</dt>
+        <dd>{{ selectedUser.website ?? 'N/A' }}</dd>
+      </div>
+    </dl>
+  </article>
+} @else {
+  <div class="state state--empty" aria-live="polite">User not found.</div>
+}
