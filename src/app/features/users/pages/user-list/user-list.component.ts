@@ -1,9 +1,18 @@
+// This component is responsible for displaying a list of users and providing search functionality to filter the list based on user input. It uses signals to manage state and computed signals to derive filtered data based on the search query.
 import { Component, computed, inject, signal } from '@angular/core';
 
+
+// Import the UserService to fetch user data from the API, UserCard component to display individual user information, and User model to define the structure of user data
 import { UserService } from '../../../../core/services/user.service';
+
+// Import the UserCard component to display individual user information and the User model to define the structure of user data
 import { UserCard } from '../../components/user-card/user-card.component';
+
+// Import the User model to define the structure of user data
 import { User } from '../../models/user.model';
 
+
+// Define the UserListPage component with its selector, template, and styles
 @Component({
   selector: 'app-user-list-page',
   imports: [UserCard],
