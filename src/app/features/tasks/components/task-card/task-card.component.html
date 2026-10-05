@@ -1,4 +1,3 @@
-
 <article class="task-card" [class.task-card--completed]="task().status === 'completed'">
   <span class="task-card__marker" aria-hidden="true"></span>
 
@@ -11,12 +10,31 @@
     }
   </div>
 
-  <button
-    class="task-card__delete"
-    type="button"
-    [attr.aria-label]="'Delete task: ' + task().title"
-    (click)="deleteTask.emit(task().id)"
-  >
-    Delete
-  </button>
+  <div class="task-card__actions">
+    <a
+      class="task-card__edit"
+      [routerLink]="['/tasks', task().id, 'edit']"
+      [attr.aria-label]="'Edit task: ' + task().title"
+    >
+      Edit
+    </a>
+    <button
+      class="task-card__delete"
+      type="button"
+      [attr.aria-label]="'Delete task: ' + task().title"
+      (click)="deleteTask.emit(task().id)"
+    >
+      Delete
+    </button>
+    @if (task().status === 'pending') {
+      <button
+        class="task-card__complete"
+        type="button"
+        [attr.aria-label]="'Complete task: ' + task().title"
+        (click)="completeTask.emit(task().id)"
+      >
+        Complete
+      </button>
+    }
+  </div>
 </article>

@@ -7,9 +7,9 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
+  background: rgb(255 255 255 / 92%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .app-shell__nav {
@@ -22,20 +22,41 @@
 
 .app-shell__nav a {
   text-decoration: none;
-  color: #374151;
+  color: var(--color-muted);
   font-weight: 600;
   padding: 0.6rem 0.9rem;
-  border-radius: 999px;
-  transition: background 0.2s ease;
+  border-radius: 6px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.app-shell__nav a:hover {
+  background: var(--color-canvas);
+  color: var(--color-ink);
 }
 
 .app-shell__nav a.active {
-  background: #e0f2fe;
-  color: #0f172a;
+  background: var(--color-green-soft);
+  color: var(--color-green);
 }
 
 .app-shell__content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.25rem 3rem;
+}
+
+@media (max-width: 560px) {
+  .app-shell__nav {
+    gap: 0.35rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  .app-shell__nav a {
+    padding: 0.55rem 0.7rem;
+    font-size: 13px;
+  }
+
+  .app-shell__content {
+    padding: 1rem 0.75rem 2rem;
+  }
 }

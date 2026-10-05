@@ -1,1 +1,50 @@
-<app-task-list />
+<main class="dashboard-page">
+	<header class="dashboard-page__header">
+		<div>
+			<p class="dashboard-page__eyebrow">PERSONAL ORGANIZER</p>
+			<h1>Dashboard</h1>
+		</div>
+		<a class="dashboard-page__add" routerLink="/tasks/new">Add task</a>
+	</header>
+
+	<section class="dashboard-summary" aria-label="Task summary">
+		<div class="dashboard-summary__item">
+			<span class="dashboard-summary__label">Total tasks</span>
+			<strong>{{ totalTasks() }}</strong>
+		</div>
+		<div class="dashboard-summary__item dashboard-summary__item--pending">
+			<span class="dashboard-summary__label">Pending</span>
+			<strong>{{ pendingCount() }}</strong>
+		</div>
+		<div class="dashboard-summary__item dashboard-summary__item--completed">
+			<span class="dashboard-summary__label">Completed</span>
+			<strong>{{ completedTasks() }}</strong>
+		</div>
+	</section>
+
+	<section class="dashboard-up-next" aria-labelledby="up-next-heading">
+		<header class="dashboard-up-next__header">
+			<div>
+				<p class="dashboard-page__eyebrow">PENDING WORK</p>
+				<h2 id="up-next-heading">Up next</h2>
+			</div>
+			<a routerLink="/tasks">View all tasks</a>
+		</header>
+
+		@if (pendingTasks().length === 0) {
+			<p class="dashboard-up-next__empty">No pending tasks. All caught up.</p>
+		} @else {
+			<ul class="dashboard-task-list">
+				@for (task of pendingTasks(); track task.id) {
+					<li class="dashboard-task-list__item">
+						<span class="dashboard-task-list__marker" aria-hidden="true"></span>
+						<span class="dashboard-task-list__title">{{ task.title }}</span>
+						<a [routerLink]="['/tasks', task.id, 'edit']" [attr.aria-label]="'Edit task: ' + task.title">
+							Edit
+						</a>
+					</li>
+				}
+			</ul>
+		}
+	</section>
+</main>

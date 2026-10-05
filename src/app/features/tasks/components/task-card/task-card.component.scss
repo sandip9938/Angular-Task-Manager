@@ -67,17 +67,42 @@
 	color: var(--color-green);
 }
 
-.task-card__delete {
+.task-card__actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.task-card__edit,
+.task-card__delete,
+.task-card__complete {
 	min-height: 36px;
-	padding: 0 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
 	border: 1px solid transparent;
 	border-radius: 6px;
 	background: transparent;
-	color: #8a6257;
-	cursor: pointer;
+	font: inherit;
 	font-size: 12px;
 	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
 	transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.task-card__edit {
+	color: var(--color-green);
+}
+
+.task-card__edit:hover {
+	border-color: var(--color-green-soft);
+	background: var(--color-green-soft);
+}
+
+.task-card__delete {
+	color: #8a6257;
 }
 
 .task-card__delete:hover {
@@ -86,14 +111,43 @@
 	color: #a7443a;
 }
 
+.task-card__complete {
+	color: var(--color-green);
+}
+
+.task-card__complete:hover {
+	border-color: var(--color-green-soft);
+	background: var(--color-green-soft);
+}
+
 @media (max-width: 420px) {
 	.task-card {
-		grid-template-columns: 10px minmax(0, 1fr) auto;
+		grid-template-columns: 10px minmax(0, 1fr);
 		gap: 12px;
 		padding: 15px 13px;
 	}
 
-	.task-card__delete {
+	.task-card__marker {
+		grid-row: 1;
+		align-self: start;
+		margin-top: 6px;
+	}
+
+	.task-card__details {
+		grid-column: 2;
+	}
+
+	.task-card__actions {
+		grid-column: 2;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		gap: 2px;
+	}
+
+	.task-card__edit,
+	.task-card__delete,
+	.task-card__complete {
+		min-height: 34px;
 		padding: 0 8px;
 	}
 }
