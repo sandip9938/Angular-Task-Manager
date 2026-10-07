@@ -33,6 +33,28 @@
       </div>
     </div>
 
+    <div class="task-form__field">
+      <label for="category">Category</label>
+      <select
+        id="category"
+        class="task-form__select"
+        formControlName="category"
+        aria-describedby="category-errors"
+        [attr.aria-invalid]="form.controls.category.touched && form.controls.category.invalid"
+      >
+        <option value="">Select a category</option>
+        <option value="Work">Work</option>
+        <option value="Study">Study</option>
+        <option value="Personal">Personal</option>
+      </select>
+
+      <div id="category-errors" class="task-form__errors" aria-live="polite">
+        @if (form.controls.category.touched && form.controls.category.hasError('required')) {
+          <p role="alert">Category is required.</p>
+        }
+      </div>
+    </div>
+
     <footer class="task-form__actions">
       <a class="task-form__cancel" routerLink="/tasks">Cancel</a>
       <button class="task-form__submit" type="submit">Save changes</button>

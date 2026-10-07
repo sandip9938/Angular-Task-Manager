@@ -1,9 +1,9 @@
 // This file defines the TaskList component, which displays a list of tasks in the Angular Task Manager application.
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 // Import the Task interface from the models directory
-import { Task } from '../../models/task.model';
+import { isTaskCategory, Task, TaskCategory } from '../../models/task.model';
 
 // Import the TaskCard component from the components directory
 import { TaskCard } from '../../components/task-card/task-card.component';
@@ -43,6 +43,7 @@ export class TaskList {
 
   // Inject the TaskService to access the shared task data
   private readonly taskService = inject(TaskService);
+  private readonly route = inject(ActivatedRoute);
 
   // Use the tasks signal from the TaskService to manage the list of tasks in this component
   protected readonly tasks = this.taskService.tasks;
@@ -60,17 +61,25 @@ export class TaskList {
   protected readonly query = signal('');
   // Define a signal to hold the status filter for filtering tasks based on their status (all, pending, completed)
   protected readonly statusFilter = signal<'all' | Task['status']>('all');
+  protected readonly categoryFilter = signal<'all' | TaskCategory>(this.initialCategory());
+
+  private initialCategory(): 'all' | TaskCategory {
+    const category = this.route.snapshot.queryParamMap.get('category');
+    return isTaskCategory(category) ? category : 'all';
+  }
 
   // Define a computed property to filter tasks based on the search query and status filter
   protected readonly filteredTasks = computed(() => {
     const searchText = this.query().trim().toLowerCase();
     const selectedStatus = this.statusFilter();
+    const selectedCategory = this.categoryFilter();
 
     return this.tasks().filter((task) => {
       const matchesSearch = task.title.toLowerCase().includes(searchText);
       const matchesStatus = selectedStatus === 'all' || task.status === selectedStatus;
+      const matchesCategory = selectedCategory === 'all' || task.category === selectedCategory;
 
-      return matchesSearch && matchesStatus;
+      return matchesSearch && matchesStatus && matchesCategory;
     });
   });
 
@@ -84,6 +93,11 @@ export class TaskList {
   protected onStatusFilterChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
     this.statusFilter.set(select.value as 'all' | Task['status']);
+  }
+
+  protected onCategoryFilterChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.categoryFilter.set(isTaskCategory(select.value) ? select.value : 'all');
   }
 
 }

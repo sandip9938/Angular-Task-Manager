@@ -51,12 +51,26 @@
             <option value="completed">Completed</option>
           </select>
         </div>
+
+        <div class="task-filters__field">
+          <label for="task-category">Category</label>
+          <select
+            id="task-category"
+            [value]="categoryFilter()"
+            (change)="onCategoryFilterChange($event)"
+          >
+            <option value="all">All categories</option>
+            <option value="Work">Work</option>
+            <option value="Study">Study</option>
+            <option value="Personal">Personal</option>
+          </select>
+        </div>
       </div>
       <div class="task-list">
         @if (tasks().length === 0) {
           <p class="task-list__empty">No tasks yet. Add your first task.</p>
         } @else if (filteredTasks().length === 0) {
-          <p class="task-list__empty">No tasks match your search or status filter.</p>
+          <p class="task-list__empty">No tasks match your filters.</p>
         } @else {
           @for (task of filteredTasks(); track task.id) {
             <app-task-card

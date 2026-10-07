@@ -60,7 +60,8 @@
 	font-weight: 650;
 }
 
-.task-form__input {
+.task-form__input,
+.task-form__select {
 	width: 100%;
 	min-height: 48px;
 	padding: 0 14px;
@@ -72,13 +73,15 @@
 	transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.task-form__input:focus {
+.task-form__input:focus,
+.task-form__select:focus {
 	border-color: var(--color-green);
 	outline: 0;
 	box-shadow: 0 0 0 3px var(--color-green-soft);
 }
 
-.task-form__input[aria-invalid='true'] {
+.task-form__input[aria-invalid='true'],
+.task-form__select[aria-invalid='true'] {
 	border-color: #b94a48;
 }
 

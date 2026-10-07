@@ -2,24 +2,24 @@
 import { Injectable, signal } from '@angular/core';
 
 // Import the Task interface from the models directory to define the structure of tasks.
-import { Task } from '../../features/tasks/models/task.model';
+import { Task, TaskCategory } from '../../features/tasks/models/task.model';
 
 // The TaskService class is decorated with @Injectable, making it available for dependency injection throughout the application.
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   readonly tasks = signal<Task[]>([
-    { id: 1, title: 'Read emails', status: 'pending' },
-    { id: 2, title: 'Plan the day', status: 'completed' },
-    { id: 3, title: 'Review notes', status: 'pending' },
-    { id: 4, title: 'Update report', status: 'completed' },
-    { id: 5, title: 'Prepare meeting', status: 'pending' },
+    { id: 1, title: 'Read emails', status: 'pending', category: 'Work' },
+    { id: 2, title: 'Plan the day', status: 'completed', category: 'Personal' },
+    { id: 3, title: 'Review notes', status: 'pending', category: 'Study' },
+    { id: 4, title: 'Update report', status: 'completed', category: 'Work' },
+    { id: 5, title: 'Prepare meeting', status: 'pending', category: 'Study' },
   ]);
 
   // The addTask method allows adding a new task to the list. It takes a title as an argument, generates a unique ID for the new task, and updates the tasks signal with the new task.
-  addTask(tittle: string): void {
+  addTask(tittle: string, category: TaskCategory): void {
     this.tasks.update((currentTasks) => {
       const nextId = Math.max(0, ...currentTasks.map((task) => task.id)) + 1;
-      return [...currentTasks, { id: nextId, title: tittle, status: 'pending' }];
+      return [...currentTasks, { id: nextId, title: tittle, status: 'pending', category }];
     });
   }
 
@@ -29,9 +29,9 @@ export class TaskService {
   }
 
   // The updateTask method allows updating an existing task in the list. It takes a task object as an argument and updates the corresponding task in the tasks signal based on its ID.
-  updateTask(id: number, tittle: string): void {
+  updateTask(id: number, tittle: string, category: TaskCategory): void {
     this.tasks.update((currentTasks) =>
-      currentTasks.map((task) => (task.id === id ? { ...task, title: tittle } : task)),
+      currentTasks.map((task) => (task.id === id ? { ...task, title: tittle, category } : task)),
     );
   }
 

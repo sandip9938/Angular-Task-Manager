@@ -2,6 +2,7 @@ import { inject, Component } from '@angular/core';
 import { TaskService } from '../../../../core/services/task.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isTaskCategory } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-create',
@@ -22,6 +23,7 @@ export class TaskCreate {
   //Reactive form for task creation with validation
   protected readonly form = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/\S/)]],
+    category: ['', Validators.required],
   });
 
   //submit method to handle form submission and add a new task
@@ -30,7 +32,12 @@ export class TaskCreate {
       this.form.markAllAsTouched();
       return;
     }
-    this.taskService.addTask(this.form.controls.title.value.trim());
+    const category = this.form.controls.category.value;
+    if (!isTaskCategory(category)) {
+      this.form.controls.category.markAsTouched();
+      return;
+    }
+    this.taskService.addTask(this.form.controls.title.value.trim(), category);
     void this.router.navigate(['/tasks']);
   }
 }

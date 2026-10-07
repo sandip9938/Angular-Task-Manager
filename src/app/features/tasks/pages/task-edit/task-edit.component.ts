@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isTaskCategory } from '../../models/task.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TaskService } from '../../../../core/services/task.service';
 
@@ -26,6 +27,7 @@ export class TaskEdit {
   // Defining a reactive form for task editing with validation rules for the title field
   protected readonly form = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/\S/)]],
+    category: ['', Validators.required],
   });
 
   // The constructor initializes the component and pre-fills the form with the existing task data based on the task ID. If the task is not found, it navigates back to the task list.
@@ -35,7 +37,7 @@ export class TaskEdit {
       void this.router.navigate(['/tasks']);
       return;
     }
-    this.form.patchValue({ title: task.title });
+    this.form.patchValue({ title: task.title, category: task.category });
   }
   // The submit method handles the form submission for editing a task. It checks if the form is valid, updates the task using the TaskService, and navigates back to the task list.
   protected submit(): void {
@@ -43,7 +45,12 @@ export class TaskEdit {
       this.form.markAllAsTouched();
       return;
     }
-    this.taskService.updateTask(this.taskId, this.form.controls.title.value.trim());
+    const category = this.form.controls.category.value;
+    if (!isTaskCategory(category)) {
+      this.form.controls.category.markAsTouched();
+      return;
+    }
+    this.taskService.updateTask(this.taskId, this.form.controls.title.value.trim(), category);
     void this.router.navigate(['/tasks']);
   }
 }
